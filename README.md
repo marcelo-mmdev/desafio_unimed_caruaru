@@ -52,3 +52,30 @@ dotnet test
 ```
 
 ---
+
+### 🧩 Kata 2 — Painel de Tarefas
+
+#### Backend
+
+```bash
+cd kata-2/backend/TaskManager.Api
+dotnet run
+```
+
+A API estará disponível em:
+http://localhost:5226
+
+---
+
+#### Frontend
+
+```bash
+cd kata-2/frontend/TaskManager
+npm install
+npm run dev
+```
+
+O Front-end estará disponível em:
+http://localhost:5173
+
+---
