@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/mcraft/Documentos/GitHub/desafio_unimed_caruaru/kata-1/Kata1.Core/Kata1.Core.csproj",
+      "projectUniqueName": "/home/mcraft/Documentos/GitHub/desafio/kata-1/Kata1.Core/Kata1.Core.csproj",
       "projectName": "Kata1.Core",
-      "projectPath": "/home/mcraft/Documentos/GitHub/desafio_unimed_caruaru/kata-1/Kata1.Core/Kata1.Core.csproj",
+      "projectPath": "/home/mcraft/Documentos/GitHub/desafio/kata-1/Kata1.Core/Kata1.Core.csproj",
       "packagesPath": "/home/mcraft/.nuget/packages/",
-      "outputPath": "/home/mcraft/Documentos/GitHub/desafio_unimed_caruaru/kata-1/Kata1.Core/obj/",
+      "outputPath": "/home/mcraft/Documentos/GitHub/desafio/kata-1/Kata1.Core/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/mcraft/.nuget/NuGet/NuGet.Config"

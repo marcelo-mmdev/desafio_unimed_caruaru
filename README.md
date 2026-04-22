@@ -41,3 +41,14 @@ Para o pipeline de dados, utilizei **Python com pandas**, pela alta produtividad
 * Python 3.10+
 
 ---
+
+### 🧩 Kata 1 — Fila de Triagem
+
+Implementação da lógica de priorização de pacientes.
+
+```bash
+cd kata-1
+dotnet test
+```
+
+---
