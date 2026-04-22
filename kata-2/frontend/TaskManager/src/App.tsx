@@ -1,121 +1,143 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useCallback, useEffect, useState } from "react";
+import type { Task } from "./types/task";
+import {
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask,
+} from "./services/api";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [title, setTitle] = useState("");
+  const [filter, setFilter] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+
+  // 🔄 Carregar tarefas
+  const loadTasks = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await getTasks(filter);
+      setTasks(data);
+    } catch {
+      alert("Erro ao carregar tarefas");
+    } finally {
+      setLoading(false);
+    }
+  }, [filter]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadTasks();
+  }, [loadTasks]);
+
+  // ➕ Criar tarefa
+  async function handleCreate() {
+    if (!title.trim()) return;
+
+    try {
+      await createTask(title);
+      setTitle("");
+      loadTasks();
+    } catch {
+      alert("Erro ao criar tarefa");
+    }
+  }
+
+  // ✅ Alternar status (checkbox)
+  async function handleToggle(task: Task) {
+    const newStatus = task.status === "Pendente" ? "Concluida" : "Pendente";
+    
+    // Optimistic update
+    setTasks(prev => prev.map(t => 
+      t.id === task.id ? { ...t, status: newStatus } : t
+    ));
+
+    try {
+await updateTask(task.id, { title: task.title, status: newStatus });
+      setFilter("");
+      loadTasks();
+    } catch {
+      loadTasks();
+      alert("Erro ao atualizar tarefa");
+    }
+
+  }
+
+  // ❌ Deletar tarefa
+  async function handleDelete(id: string) {
+    try {
+      await deleteTask(id);
+      loadTasks();
+    } catch {
+      alert("Erro ao deletar tarefa");
+    }
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div style={{ padding: 20 }}>
+      <h1>Task Manager</h1>
 
-      <div className="ticks"></div>
+      {/* Criar tarefa */}
+      <div>
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Nova tarefa"
+        />
+        <button onClick={handleCreate}>Criar</button>
+      </div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      {/* Filtro */}
+      <div style={{ marginTop: 10 }}>
+        <button onClick={() => setFilter("")}>Todas</button>
+        <button onClick={() => setFilter("Pendente")}>Pendentes</button>
+        <button onClick={() => setFilter("Concluida")}>Concluídas</button>
+      </div>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* Loading */}
+      {loading && <p>Carregando...</p>}
+
+      {/* Lista */}
+      <ul style={{ marginTop: 20 }}>
+        {tasks.map((task) => (
+          <li key={task.id} style={{ marginBottom: 10 }}>
+            
+            {/* Checkbox */}
+            <input
+              type="checkbox"
+              checked={task.status === "Concluida"}
+              onChange={() => handleToggle(task)}
+              style={{ marginRight: 10 }}
+            />
+
+            {/* Título */}
+            <span
+              style={{
+                textDecoration:
+                  task.status === "Concluida" ? "line-through" : "none",
+                marginRight: 10,
+              }}
+            >
+              {task.title}
+            </span>
+
+            {/* Status visual */}
+            <span style={{ marginRight: 10 }}>
+              {task.status === "Concluida" ? "✅ Concluída" : "⏳ Pendente"}
+            </span>
+
+            {/* Ações */}
+            <button onClick={() => handleToggle(task)}>
+              {task.status === "Pendente" ? "Concluir" : "Reabrir"}
+            </button>
+
+            <button onClick={() => handleDelete(task.id)}>Excluir</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default App
+export default App;
