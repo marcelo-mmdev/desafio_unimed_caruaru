@@ -63,7 +63,7 @@ dotnet run
 ```
 
 A API estará disponível em:
-http://localhost:5226
+http://localhost:5222
 
 ---
 
