@@ -1,0 +1,1 @@
+# Análise — Kata 4
