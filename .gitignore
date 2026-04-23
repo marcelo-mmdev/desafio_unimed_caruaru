@@ -1,0 +1,17 @@
+# .NET
+bin/
+obj/
+
+# Node
+node_modules/
+dist/
+
+# Editor
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+
+# Git (NÃO subir repo dentro de repo)
+.git/

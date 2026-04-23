@@ -1,0 +1,5 @@
+id_entrega,id_pedido,data_prevista,data_realizada,status_entrega
+1,1,2024-01-15,2024-01-14,OK
+2,2,2024-02-15,2024-02-20,ATRASADO
+3,999,2024-01-01,2024-01-02,OK
+4,3,2024-03-10,,PENDENTE
