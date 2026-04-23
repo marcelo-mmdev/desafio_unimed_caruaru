@@ -151,29 +151,85 @@ Se tivesse mais tempo, eu:
 
 ```
 / (raiz)
-  README.md
-  /kata-1/
-    src/
-    tests/
-    ANALISE.md
-  /kata-2/
-    backend/
-    frontend/
-    REQUISITOS.md
-    ENGENHARIA.md
-  /kata-3/
-    PLANO.md
-  /kata-4/
-    data/
-      pedidos.csv
-      clientes.csv
-      entregas.csv
-    src/
-      pipeline.py
-    output/
-      consolidado.csv
-      indicadores.json
-    ANALISE.md
+├── kata-1
+│   ├── Kata1.Core
+│   │   ├── Models
+│   │   │   └── Patient.cs
+│   │   ├── Services
+│   │   │   └── TriageService.cs
+│   │   └── Kata1.Core.csproj
+│   ├── Kata1.Tests
+│   │   ├── Kata1.Tests.csproj
+│   │   ├── TriageServiceTests.cs
+│   │   └── UnitTest1.cs
+│   ├── ANALISE.md
+│   └── Kata1.sln
+├── kata-2
+│   ├── backend
+│   │   └── TaskManager.Api
+│   │       ├── Controllers
+│   │       │   └── TasksController.cs
+│   │       ├── Models
+│   │       │   └── TaskItem.cs
+│   │       ├── Properties
+│   │       │   └── launchSettings.json
+│   │       ├── Repositories
+│   │       │   ├── ITaskRepository.cs
+│   │       │   └── InMemoryTaskRepository.cs
+│   │       ├── Services
+│   │       │   └── TaskService.cs
+│   │       ├── Program.cs
+│   │       ├── TaskManager.Api.csproj
+│   │       ├── TaskManager.Api.http
+│   │       ├── appsettings.Development.json
+│   │       └── appsettings.json
+│   ├── frontend
+│   │   └── TaskManager
+│   │       ├── .vite
+│   │       │   └── deps
+│   │       │       ├── _metadata.json
+│   │       │       └── package.json
+│   │       ├── public
+│   │       │   ├── favicon.svg
+│   │       │   └── icons.svg
+│   │       ├── src
+│   │       │   ├── assets
+│   │       │   │   ├── hero.png
+│   │       │   │   ├── react.svg
+│   │       │   │   └── vite.svg
+│   │       │   ├── components
+│   │       │   ├── services
+│   │       │   │   └── api.ts
+│   │       │   ├── types
+│   │       │   │   └── task.ts
+│   │       │   ├── App.css
+│   │       │   ├── App.tsx
+│   │       │   ├── index.css
+│   │       │   └── main.tsx
+│   │       ├── README.md
+│   │       ├── eslint.config.js
+│   │       ├── index.html
+│   │       ├── package-lock.json
+│   │       ├── package.json
+│   │       ├── tsconfig.app.json
+│   │       ├── tsconfig.json
+│   │       ├── tsconfig.node.json
+│   │       └── vite.config.ts
+│   ├── ENGENHARIA.md
+│   └── REQUISITOS.md
+├── kata-3
+│   └── PLANO.md
+├── kata-4
+│   ├── data
+│   │   ├── clientes.csv
+│   │   ├── entregas.csv
+│   │   └── pedidos.csv
+│   ├── output
+│   ├── src
+│   │   └── pipeline.py
+│   └── ANALISE.md
+├── .gitignore
+└── README.md
 ```
 
 ---
