@@ -60,6 +60,16 @@ dotnet test
 ```bash
 cd kata-2/backend/TaskManager.Api
 dotnet run
+
+```md
+Para testar a aplicação:
+
+1. Acesse o frontend
+2. Crie uma tarefa
+3. Marque como concluída
+4. Utilize os filtros
+
+A aplicação consome a API em tempo real.
 ```
 
 A API estará disponível em:
@@ -77,5 +87,109 @@ npm run dev
 
 O Front-end estará disponível em:
 http://localhost:5173
+
+---
+
+### 🧩 Kata 3 — Análise de Engenharia
+
+O plano técnico pode ser encontrado em:
+
+```
+kata-3/PLANO.md
+```
+
+---
+
+### 🧩 Kata 4 — Pipeline de Dados
+
+#### Pré-requisito
+
+```bash
+pip install pandas
+
+cd kata-4/src
+python pipeline.py
+
+kata-4/output/consolidado.csv
+```
+
+
+---
+
+## ⚙️ Decisões Técnicas
+
+* Estruturei o backend utilizando separação em camadas (**Controller, Service e Repository**) para garantir organização e manutenibilidade.
+* Optei por soluções simples e diretas, priorizando clareza e legibilidade em vez de otimizações prematuras.
+* Utilizei persistência simplificada (em memória ou SQLite) no Kata 2, considerando o escopo do desafio.
+* Implementei validações básicas e tratamento de erros para garantir consistência da aplicação.
+* No pipeline de dados, priorizei legibilidade e reprodutibilidade das transformações.
+
+---
+
+## ⚖️ Trade-offs Considerados
+
+* A escolha por persistência simples reduz complexidade inicial, mas não atende cenários de produção com alta concorrência ou necessidade de durabilidade.
+* A ausência de autenticação no Kata 2 foi uma decisão consciente para manter foco no escopo principal da feature.
+* No processamento de dados, a utilização de pandas atende bem volumes moderados, mas pode não escalar para grandes volumes sem adaptações.
+
+---
+
+## 🚀 Melhorias Futuras
+
+Se tivesse mais tempo, eu:
+
+* Implementaria autenticação e controle de usuários no Kata 2
+* Adicionaria testes automatizados mais abrangentes (unitários e de integração)
+* Utilizaria Docker para padronizar o ambiente de execução
+* Melhoraria a observabilidade com logs estruturados e métrricas
+* Evoluiria o pipeline de dados para suportar grandes volumes (ex: processamento distribuído com Spark)
+* Implementaria validações mais robustas e tratamento de edge cases adicionais
+
+---
+
+## 📂 Estrutura do Repositório
+
+```
+/ (raiz)
+  README.md
+  /kata-1/
+    src/
+    tests/
+    ANALISE.md
+  /kata-2/
+    backend/
+    frontend/
+    REQUISITOS.md
+    ENGENHARIA.md
+  /kata-3/
+    PLANO.md
+  /kata-4/
+    data/
+      pedidos.csv
+      clientes.csv
+      entregas.csv
+    src/
+      pipeline.py
+    output/
+      consolidado.csv
+      indicadores.json
+    ANALISE.md
+```
+
+---
+
+## ⭐ Diferenciais do Projeto
+
+* Separação clara de camadas no backend (Controller, Service, Repository)
+* Pipeline de dados resiliente a inconsistências reais
+* Tratamento de erros e validações básicas implementadas
+* Código organizado e legível, com foco em manutenção
+* Documentação clara e orientada ao avaliador
+
+---
+
+## 🧠 Considerações Finais
+
+Busquei abordar cada kata não apenas com foco na implementação, mas também na **qualidade das decisões técnicas, clareza na comunicação e organização do pensamento**, aspectos fundamentais no desenvolvimento de software em ambientes reais.
 
 ---
